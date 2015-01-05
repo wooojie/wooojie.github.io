@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html style="height:100%">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+</head>
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+<style>
+div#fader{
+  text-align:center;
+  display: none;
+  color: black;
+  font-family:Arial, sans-serif;
+  font-size:58px;
+  height:55%;
+  position:relative;
+  top:40%;
+}
+input{
+  display: none;
+  border-radius: 0px;
+  padding:8px 10px;
+  width:220px;
+  height:15px;
+  line-height: 22px;
+  margin:0 auto;
+  position:absolute;
+  right: 41%;
+  border:0px solid;
+  outline-width: 0px;
+  font-size: 20px;
+}
+input#password{
+  top:50px;
+}
+
+input::-webkit-input-placeholder  {
+    -webkit-transition: opacity 1s ease-in; color: rgba(150,150,150,0.8);
+}
+input:focus::-webkit-input-placeholder  {
+    opacity: 0;
+}
+
+</style>
+
+<script type='text/javascript'>
+var ready = function(){
+  setTimeout(function(){
+    $("#fader").fadeIn(4000);
+  } ,800);
+
+  
+  function toggleVisible() {
+    if($('#user').attr('placeholder')=="") {
+      var userinput = $('#user');
+      userinput.show();
+      userinput.focus();
+      userinput.attr('placeholder',"从这里开始");
+      userinput.blur();
+      $('#password').show();
+    }
+      // $('#input').attr('placeholder',"");
+    // setTimeout(toggleVisible, 4000);
+  }
+  setTimeout(toggleVisible, 2500);
+
+  setTimeout(function(){
+    $('#user').focus(function() {
+      //start timer
+      var timer = setTimeout(function(){
+        $('#user').attr('placeholder',"Email");
+      }, 3200);
+      $('#user').change(function(){
+        //stop timer
+        clearTimeout(timer);
+      });
+
+      //timer reahes, modify placeholder
+
+    });
+    $('#user').focus();
+    // $('#input').hover(function(){
+    //   var width = $('#input').width();
+    //   $('#input').css('width', width*2);
+    // }, function(){
+    //   var width = $('#input').width();
+    //   $('#input').css('width', width/2).focus();
+    // });
+  },5700);
+
+  $(':input').keypress(function(event) {
+    if (event.keyCode === 13 || event.keyCode === 10) {// 10 is for mac
+      event.preventDefault();
+      $(this).next(":input").focus();
+    }
+  });
+
+};
+
+$(document).ready(ready);
+
+//   function show()
+// {
+//  var fader = document.all.fader;
+//  fader.style.color = "red";
+// }
+</script>
+
+<body style="background-color:white;height:100%;">
+  <div style="height:100%">
+
+    <div id="fader">石墨</div>
+    <div style="position:absolute; height: 45%; width:100%; ">
+      <input id="user" placeholder="" data-index="1">
+      <input id="password" placeholder="" type="password" data-index="2">
+  </div>
+</div>
+</body>
+</html>
